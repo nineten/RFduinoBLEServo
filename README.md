@@ -1,4 +1,4 @@
-# BLEAdvertiser
+# RFduinoBLEServo 
 Example code to control a servo motor using an RFduino through BLE
 
 
