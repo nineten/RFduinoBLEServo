@@ -1,10 +1,6 @@
 #include <RFduinoBLE.h>
 #include <Servo.h>
 
-#define RED_LED_PIN   2
-#define GREEN_LED_PIN 3
-#define BLUE_LED_PIN  4
-
 Servo servo1;
 
 // interval between advertisement transmissions ms (range is 20ms to 10.24s) - default 20ms
@@ -22,7 +18,7 @@ void setup() {
   // a single byte, then it will truncate the deviceName)
   RFduinoBLE.advertisementData = "ledbtn";
   RFduinoBLE.advertisementInterval = interval;
-  RFduinoBLE.deviceName = "JBLEAdv";
+  RFduinoBLE.deviceName = "JBLELed";
   RFduinoBLE.txPowerLevel = -20;
 
   // change the advertisement interval
@@ -64,24 +60,24 @@ void RFduinoBLE_onReceive(char *data, int len)
 	if (data[0])
 	{
 		ToggleMotor(int(data[0]));
-		Serial.println("Turn RFduino Blue LED On");
+		Serial.println("Toggle servo");
 	}
 	else {
-		Serial.println("Turn RFduino Blue LED Off");
+		Serial.println("Do Nothing");
 	}
 }
 
 void ToggleMotor(int val) {
 	Serial.println(val);
 	if (val == 1) {
-		for(pos = 0; pos < 180; pos += 1) {
+		for(pos = 45; pos < 135; pos += 1) {
 			servo1.write(pos);           // sets the servo 1 position according to the scaled value 
-			delay(15);                       // waits 15ms for the servo to reach the position 
+			delay(5);                       // waits 15ms for the servo to reach the position 
 		} 
 	} else if (val == 2) {
-		for(pos = 180; pos >= 1; pos -= 1) {
+		for(pos = 135; pos >= 45; pos -= 1) {
 			servo1.write(pos);           // sets the servo 1 position according to the scaled value 
-			delay(15);                       // waits 15ms for the servo to reach the position 
+			delay(5);                       // waits 15ms for the servo to reach the position 
 		} 
 	}
 }
