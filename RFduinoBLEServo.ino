@@ -13,7 +13,7 @@ int pos = 0;
 
 void setup() {
   // led used to indicate that the RFduino is advertising
-	servo1.attach(1);
+	servo1.attach(2);
 	Serial.begin(9600);
 
   // this is the data we want to appear in the advertisement
@@ -60,6 +60,7 @@ void RFduinoBLE_onReceive(char *data, int len)
 {
 	// If the first byte is 0x01 / on / true
 	Serial.println("Received data over BLE");
+	Serial.println(int(data[0]));
 	if (data[0])
 	{
 		ToggleMotor(int(data[0]));
