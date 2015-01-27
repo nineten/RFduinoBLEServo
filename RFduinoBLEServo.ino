@@ -9,7 +9,7 @@ int pos = 0;
 
 void setup() {
   // led used to indicate that the RFduino is advertising
-	servo1.attach(2);
+	servo1.attach(3);
 	Serial.begin(9600);
 
   // this is the data we want to appear in the advertisement
@@ -18,7 +18,7 @@ void setup() {
   // a single byte, then it will truncate the deviceName)
   RFduinoBLE.advertisementData = "ledbtn";
   RFduinoBLE.advertisementInterval = interval;
-  RFduinoBLE.deviceName = "JBLELed";
+  RFduinoBLE.deviceName = "JBLEServo";
   RFduinoBLE.txPowerLevel = -20;
 
   // change the advertisement interval
@@ -72,12 +72,12 @@ void ToggleMotor(int val) {
 	if (val == 1) {
 		for(pos = 45; pos < 135; pos += 1) {
 			servo1.write(pos);           // sets the servo 1 position according to the scaled value 
-			delay(5);                       // waits 15ms for the servo to reach the position 
+			delay(10);                       // waits 15ms for the servo to reach the position 
 		} 
 	} else if (val == 2) {
 		for(pos = 135; pos >= 45; pos -= 1) {
 			servo1.write(pos);           // sets the servo 1 position according to the scaled value 
-			delay(5);                       // waits 15ms for the servo to reach the position 
+			delay(10);                       // waits 15ms for the servo to reach the position 
 		} 
 	}
 }
